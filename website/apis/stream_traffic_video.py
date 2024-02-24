@@ -52,7 +52,7 @@ def get_live_feed(base_url: str) -> str:
 
 
 def main() -> None:
-    get_live_feed(AVAILABLE_CAMERA_FEEDS[1])
+    print(get_live_feed(AVAILABLE_CAMERA_FEEDS[100]))
 
 
 if __name__ == "__main__":
