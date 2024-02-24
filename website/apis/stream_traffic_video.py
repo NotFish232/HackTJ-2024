@@ -1,6 +1,5 @@
 import requests
 import shutil
-from typing import Generator
 import os
 import cv2
 
