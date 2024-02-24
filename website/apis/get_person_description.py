@@ -28,7 +28,7 @@ def encode_image(image_path: str) -> str:
     return base64_image
 
 
-def image_to_description(image_path: str) -> str:
+def get_person_description(image_path: str) -> str:
     base64_image = encode_image(image_path)
     headers = {
         "Content-Type": "application/json",
@@ -62,7 +62,7 @@ def image_to_description(image_path: str) -> str:
 
 
 def main() -> None:
-    image_to_description("alan_new.jpg")
+    get_person_description("alan_new.jpg")
 
 
 if __name__ == "__main__":
