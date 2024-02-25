@@ -1,0 +1,23 @@
+<script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzymwd4HDcbhC3AQ_zZtHju_jcLclpRYU&libraries=places&callback=initMap"></script>
+<script>
+  function initMap() {
+    const input = document.getElementById('id_location');
+    const center = { lat: 38.89511, lng: 	-77.03637 };  // Washington, DC
+
+    // 50 km radius
+    const defaultBounds = {
+      north: center.lat + 0.5,
+      south: center.lat - 0.5,
+      east: center.lng + 0.5,
+      west: center.lng - 0.5,
+    };
+    const options = {
+      bounds: defaultBounds,
+      // componentRestrictions: { country: "us" },
+      fields: ["address_components", "geometry", "icon", "name"],
+      strictBounds: false,
+      // types: ["establishment"],
+    };
+    const autocomplete = new google.maps.places.Autocomplete(input, options);
+  }
+</script>

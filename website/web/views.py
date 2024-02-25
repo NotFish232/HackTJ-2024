@@ -149,3 +149,6 @@ def report_information_view(request):
     return render(request, "report_information.html", {
         "form": form,
     })
+
+def dashboard_view(request):
+    pass

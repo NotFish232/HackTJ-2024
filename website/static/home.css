@@ -1,6 +1,7 @@
-.body{
+body{
     align-items: center;
     justify-content: center;
+    background-color: aliceblue;
 }
 
 section {
@@ -9,26 +10,37 @@ section {
 }
 
 #sec-00 {
+    padding-top: 10%;
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: center;
-    height: 100vh; /* This ensures that the section takes the full viewport height */
+    height: 100vh; 
+    border-color: black;
 }
 
+#sec-00 h1 {
+    font-size: 3em;
+    padding-bottom: 2%;
+    margin: 0;
+    font-weight: bold;
+    
+}
 #sec-00 h3 {
     font-size: 2em;
-    padding-bottom: 3x;
-    margin: 0; /* Remove default margin */
+    padding-bottom: 5%;
+    margin: 0;
 }
 
 #learnmore {
     color: white;
     padding: 10px;
-    border-radius: 10px;
+    border-radius: 25px;
     background-color: red;
-    border: none; /* Add this if you want to remove the default border */
-    cursor: pointer; /* Add this to change the cursor on hover */
+    font-weight: bold;
+    width: 15%;
+    border: none;
+    cursor: pointer; 
 }
 
 .statcard{ 
