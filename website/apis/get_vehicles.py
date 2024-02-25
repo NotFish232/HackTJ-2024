@@ -53,7 +53,7 @@ def get_color_name(requested_color: tuple[int, int, int]) -> str:
 
 def get_vehicles(
     image_path: str,
-) -> tuple[str, list[int, int, int, int, str]]:
+) -> tuple[str, list[tuple[int, int, int, int, str]]]:
     image = np.array(Image.open(image_path))
     result = model.predict(image, device="cpu", verbose=False)[0]
     annotator = Annotator(image, font_size=1, line_width=1)
