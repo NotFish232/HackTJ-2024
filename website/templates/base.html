@@ -37,9 +37,12 @@
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="{% url 'alerts' %}">Alerts</a>
           </li>
-          {% if request.user.is_authenticated and request.user.is_staff %}
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="{% url 'video' %}">Video</a>
+          </li>
+          {% if request.user.is_authenticated and request.user.is_staff %}
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="{% url 'dashboard' %}">Dashboard</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="{% url 'admin:index' %}">Admin</a>
