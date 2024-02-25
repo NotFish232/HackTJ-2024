@@ -10,3 +10,4 @@ admin.site.register(PersonDescriptionResult)
 admin.site.register(PeopleGetAllResult)
 admin.site.register(VehicleIdentificationResult)
 admin.site.register(LicensePlateResult)
+
