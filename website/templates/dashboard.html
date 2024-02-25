@@ -24,17 +24,21 @@
         <h2>People</h2>
         <hr noshade class="hr-header people">
         <div class="row">
-            <h4>Facial Recognition</h4>
+            <h4>
+                <a href="{% url 'facial-recognition' %}">
+                Facial Recognition
+                </a>
+            </h4>
             <div class="row">
-                <div class="col">
-                    Source:
-                    <br>
-                    <img src="{{ facial_source }}">
-                </div>
                 <div class="col">
                     Target:
                     <br>
                     <img src="{{ facial_target }}">
+                </div>
+                <div class="col">
+                    Source:
+                    <br>
+                    <img src="{{ facial_source }}">
                 </div>
             </div>
             <div class="row" style="margin-top: 10px">
@@ -52,7 +56,11 @@
         </div>
         <hr class="people">
         <div class="row">
-            <h4>Get All People</h4>
+            <h4>
+                <a href="{% url 'people-all' %}">
+                Get All People
+                </a>
+            </h4>
             <div class="row">
                 <div class="col">
                     Source:
@@ -75,7 +83,11 @@
         </div>
         <hr class="people">    
         <div class="row">
-            <h4>Person Description</h4>
+            <h4>
+                <a href="{% url 'person-description' %}">
+                Person Description
+                </a>
+            </h4>
             <div class="row">
                 <div class="col">
                     Source:
@@ -96,7 +108,11 @@
         <hr noshade class="hr-header vehicle">
         <div class="row">
             <div class="row">
-                <h4>Vehicle Identification</h4>
+                <h4>
+                    <a href="{% url 'vehicle-identification' %}">
+                    Vehicle Identification
+                    </a>
+                </h4>
                 <div class="row">
                     <div class="col">
                         Source:
@@ -124,7 +140,11 @@
             </div>
             <hr class="vehicle" style="margin-top: 16px;">
             <div class="row">
-                <h4>License Plate Recognition</h4>
+                <h4>
+                    <a href="{% url 'license-plate' %}">
+                    License Plate Recognition
+                    </a>
+                </h4>
                 <div class="row">
                     <div class="col">
                         Source:

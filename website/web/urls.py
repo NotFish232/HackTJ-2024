@@ -17,4 +17,9 @@ urlpatterns = [
     path("report-information", report_information_view, name="report-information"),
     path("dashboard", dashboard_view, name="dashboard"),
     path("map", map_view, name="map"),
+    path("facial-recognition", facial_recognition, name="facial-recognition"),
+    path("people-all", people_all, name="people-all"),
+    path("person-description", person_description, name="person-description"),
+    path("vehicle-identification", vehicle_identification, name="vehicle-identification"),
+    path("license-plate", license_plate, name="license-plate"),
 ]

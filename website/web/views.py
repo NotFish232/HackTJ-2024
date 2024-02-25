@@ -203,3 +203,54 @@ def map_view(request):
         "alert_locations": alert_locations,
     }
     return render(request, "google-maps-address.html", ctx)
+
+
+def facial_recognition(request):
+    return render(request, "facial-recognition.html", {
+        "results": [{
+            "id": obj.id,
+            "source_image": get_result_path(obj.source_image),
+            "target_image": get_result_path(obj.target_image),
+            "box_result": get_result_path(obj.box_result),
+            "cropped_result": get_result_path(obj.cropped_result)
+        } for obj in FacialDetectionResult.objects.all()]
+    })
+
+def people_all(request):
+    return render(request, "people-all.html", {
+        "results": [{
+            "id": obj.id,
+            "image": get_result_path(obj.image),
+            "box_result": get_result_path(obj.box_result),
+            "cropped_result": get_result_path(obj.cropped_result)
+        } for obj in PeopleGetAllResult.objects.all()]
+    })
+
+def person_description(request):
+    return render(request, "person-description.html", {
+        "results": [{
+            "id": obj.id,
+            "image": get_result_path(obj.image),
+            "description": obj.description
+        } for obj in PersonDescriptionResult.objects.all()]
+    })
+
+def vehicle_identification(request):
+    return render(request, "vehicle-identification.html", {
+        "results": [{
+            "id": obj.id,
+            "image": get_result_path(obj.image),
+            "description": obj.description,
+            "box_result": get_result_path(obj.box_result),
+            "cropped_result": get_result_path(obj.cropped_result)
+        } for obj in VehicleIdentificationResult.objects.all()]
+    })
+
+def license_plate(request):
+    return render(request, "license-plate.html", {
+        "results": [{
+            "id": obj.id,
+            "image": get_result_path(obj.image),
+            "license_plate": obj.license_plate
+        } for obj in LicensePlateResult.objects.all()]
+    })
