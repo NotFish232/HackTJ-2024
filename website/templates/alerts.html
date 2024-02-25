@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Alerts
+{% endblock %}
+
+{% block css %}
+    <link href="{% static 'alerts.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+
+<h1>Active Alerts</h1>
+{% for alert in active_alerts %}
+
+{% endfor %}
+
+{% endblock %}

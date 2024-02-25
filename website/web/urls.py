@@ -6,4 +6,5 @@ from .views import *
 
 urlpatterns = [
     path('', home_view, name="index"),
+    path('alerts', alerts_view, name="alerts")
 ]

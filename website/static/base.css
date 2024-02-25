@@ -1,0 +1,30 @@
+nav.navbar {
+    background-color: #2A2E30 !important;
+    height: 50px;
+}
+
+img.navbar-logo {
+    position: relative;
+    top: 25px;  
+}
+
+.nav-link {
+    color: rgb(206, 153, 18);
+}
+
+.nav-link:hover {
+    color: rgb(209, 178, 0);
+}
+
+footer {
+    position: absolute; 
+    bottom: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+#content {
+    margin-top: 5px;
+}
