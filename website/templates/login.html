@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block css %}
+    <link href="{% static 'login.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+<form class="form-signin" method="post">
+        <div class="form-group">
+            {% csrf_token %}
+            <div id="box">
+                <h1 class="h3 mb-3 font-weight-normal signintext" id="signhead"><b>Sign in</b></h1>
+            </div>
+            <hr>
+            <input type="email" name="email" id="email" class="form-control" placeholder="Email address" required autofocus value="{{ email }}">
+            <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
+            <br>
+            <button class="btn btn-lg btn-success btn-block" id="login-button" type="submit">Sign in</button>
+            {% comment %} <button class="btn btn-lg btn-primary btn-block">
+                <a style="color: white; text-decoration: none;" href="{% url 'sign_up' %}">Sign up</a>
+            </button> {% endcomment %}
+        </div>
+        {% if error %}
+            <br>
+            <div class="alert alert-danger" role="alert">
+                <i class="fa-sharp fa-solid fa-triangle-exclamation"></i>
+                <span>{{ error }}</span>
+            </div>
+        {% endif %}
+        {% if message %}
+            <br>
+            <div class="alert alert-success" role="alert">
+                {{ message }}
+            </div>
+        {% endif %}
+    </form>
+{% endblock %}

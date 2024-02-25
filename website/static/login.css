@@ -1,0 +1,18 @@
+#box {
+    margin-top: 20%;
+}
+
+#signhead {
+    color: rgb(168, 122, 7);
+    text-align: left;
+}
+
+#login-button {
+    background-color: rgb(168, 122, 7);
+    color: white;
+    border-radius: 10%;
+}
+
+hr {
+    border: 2px solid rgb(116, 84, 2);
+}

@@ -41,6 +41,23 @@
             <a class="nav-link" aria-current="page">REPORT</a>
           </li>
         </ul>
+        <ul class="navbar-nav" style="position: absolute; right: 10px;">
+          {% if request.user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="{% url 'profile' %}">
+              <i class="fa-solid fa-user"></i>&nbsp;
+              {{ request.user.person.full_name }}
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="{% url 'logout' %}">Logout</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="{% url 'login' %}">Login</a>
+          </li>
+          {% endif %}
+        </ul>
       </div>
   </nav>
   {% endblock %}
