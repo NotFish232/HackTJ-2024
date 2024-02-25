@@ -9,11 +9,23 @@
     <link href="{% static 'alerts.css' %}" rel="stylesheet">
 {% endblock %}
 
+{% block js %}
+    <script src="{% static 'alerts.js' %}"></script>
+{% endblock %}
+
 {% block body %}
 
-<h1>Active Alerts</h1>
+<h2 class="alerts-active center">Active Alerts</h2>
 {% for alert in active_alerts %}
-
+    {% include 'alert.html' %}
 {% endfor %}
+
+<br>
+<h2 class="alerts-resolved center">Resolved Alerts <i class="resolved-arrow fas fa-chevron-down"></i></h2>
+<div class="alerts-resolved-container">
+{% for alert in resolved_alerts %}
+    {% include 'alert.html' %}
+{% endfor %}
+</div>
 
 {% endblock %}

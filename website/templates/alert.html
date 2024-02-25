@@ -1,0 +1,46 @@
+<div class="alert container">
+    <img src={{ alert.person.photo_url }} class="alert-photo" height="110">
+    <p class="alert-date">
+        Missing from: {{ alert.location }}. &nbsp;&nbsp;&nbsp;
+        Missing since: {{ alert.date }}
+    </p>
+    <h3 class="alert-name">{{ alert.person.full_name }}</h3>
+    <div class="alert-person-info">
+        <div class="row">
+            <div class="col">
+                Sex: {{ alert.person.get_sex_display }}
+            </div>
+            <div class="col">
+                Age: {{ alert.person.age }}
+            </div>
+            <div class="col">
+                Race: {{ alert.person.get_race_display }}
+            </div>
+            <div class="col">
+                Height: {{ alert.person.height }}
+            </div>
+            <div class="col">
+                Weight: {{ alert.person.weight }}
+            </div>
+            <div class="col">
+                Hair color: {{ alert.person.hair_color }}
+            </div>
+            <div class="col">
+                Eye color: {{ alert.person.eye_color }}
+            </div>
+        </div>
+    </div>
+    <div class="alert-person-description">
+        <div class="row">
+            <span>
+                <i>Person description:</i> &nbsp;
+                {% if alert.person.description %}
+                    {{ alert.person.description }}
+                {% else %}
+                    No description available.
+                {% endif %}
+            </span>
+        </div>
+    </div>
+    <p class="alert-description">{{ alert.description }}</p>    
+</div>

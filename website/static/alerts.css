@@ -1,0 +1,50 @@
+.alert {
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+}
+
+.alert-photo {
+    float: left;
+    margin-right: 15px;
+}
+
+.alert-date {
+    float: right;
+    color: rgb(101, 101, 101);
+    margin: 0;
+}
+
+.alert-divider {
+    margin: 10px;
+}
+
+.alert-person-info .row {
+    border-top: 1px solid lightgrey;
+    border-bottom: 1px solid lightgrey;
+    padding: 5px;
+    margin-top: 5px;
+    text-align: left;
+}
+
+.alert-person-description .row {
+    border-bottom: 1px solid lightgrey;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+.alerts-active, .alerts-resolved {
+    background-color: rgb(254, 193, 81);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.alerts-resolved {
+    background-color: rgb(214, 214, 214);
+    cursor: pointer;
+}
+
+.resolved-arrow {
+    float: right;
+    margin-top: 5px;
+    margin-right: 5px;
+}

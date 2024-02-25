@@ -5,26 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Landing Page</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script> 
+    <script>
+        tailwind.config = {
+          theme: {
+            extend: {
+              colors: {
+                clifford: '#da373d',
+              }
+            }
+          }
+        }
+    </script>
 </head>
 <body>
     <header>
         <nav>
             <ul>
+                <li class="titleIcon"><h1>Vigilant</h1></li>
                 <li><a href="#">Home</a></li>
                 <li><a href="#">About</a></li>
+                <li><button class="reportsubmit">Alerts</button></li>
                 <li><button class="reportsubmit">REPORT</button></li>
             </ul>
         </nav>
     </header>
-    <main>
-        <section class="hero">
-            <h1>Vigilant is changing the way we approach AMBER alerts.</h1>
-            <p></p>
-            <div class="buttons">
-                <button>Purchase UI Kit</button>
-                <button>Learn More</button>
-            </div>
-        </section>
-    </main>
+    <section class="hero">
+        <h1>Vigilant is changing the way we approach AMBER alerts.</h1>
+        <!-- <div class="buttons">
+            <button>Purchase UI Kit</button>
+            <button>Learn More</button>
+        </div> -->
+    </section>
 </body>
 </html>

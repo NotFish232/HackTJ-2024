@@ -10,7 +10,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
     email = models.EmailField(unique=True)
-    person = models.ForeignKey('Person', on_delete=models.SET_NULL, null=True, blank=True)
+    person = models.OneToOneField('Person', on_delete=models.SET_NULL, null=True, blank=True)
  
 
 class Person(models.Model):
@@ -39,12 +39,26 @@ class Person(models.Model):
     eye_color = models.CharField(max_length=255, blank=True, null=True)
 
     description = models.TextField(blank=True, null=True)
+    photo = models.ImageField(upload_to="static/photos", blank=True, null=True)
 
     missing = models.BooleanField(default=False)
 
     @property
     def age(self):
         return (datetime.datetime.now().date() - self.date_of_birth).days // 365
+    
+    @property
+    def full_name(self):
+        return f"{self.first_name}{f' {self.middle_name}' if self.middle_name else ''} {self.last_name}"
+    
+    @property
+    def photo_url(self):
+        if self.photo:
+            return self.photo
+        return "/static/photos/no-photo.png"
+    
+    def __str__(self):
+        return self.full_name
 
 
 class Alert(models.Model):
@@ -61,7 +75,24 @@ class Alert(models.Model):
     resolved = models.BooleanField(default=False)
 
     person = models.ForeignKey('Person', on_delete=models.SET_NULL, null=True, blank=True)
-    date = models.DateTimeField(auto_now_add=True)
+    date = models.DateTimeField(null=True, blank=True)
     location = models.CharField(max_length=500, null=True, blank=True)
     contact = models.CharField(max_length=500, null=True, blank=True)
 
+    def __str__(self):
+        return self.title
+    
+    class Meta:
+        ordering = ['-date']
+
+
+class Report(models.Model):
+    title = models.CharField(max_length=500)
+    description = models.TextField()
+    date = models.DateTimeField(auto_now_add=True)
+    location = models.CharField(max_length=500, null=True, blank=True)
+    reporter = models.ForeignKey('User', on_delete=models.SET_NULL, null=True)
+    alert = models.ForeignKey('Alert', on_delete=models.SET_NULL, null=True, blank=True)
+
+    def __str__(self):
+        return self.title
