@@ -16,6 +16,11 @@
         {% csrf_token %}
         <h4 class="run-ml">Input Image:</h4>&nbsp;&nbsp;&nbsp;    
         <input name="file" class="form-control form-control-md" type="file" required>
+        <br><br>
+        <div class="progress">
+            <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <br>
         {% comment %} <input type="submit" value="Run" class="btn gold"> {% endcomment %}
     </form>
 </div>

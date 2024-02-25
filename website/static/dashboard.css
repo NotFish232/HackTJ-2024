@@ -35,3 +35,8 @@ input[type='submit'] {
     height: 200px;
     max-width: 250px;
 }
+
+.progress-bar {
+    animation: progress-bar-stripes .5s linear infinite;
+    width: 100%;
+}
