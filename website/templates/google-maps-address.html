@@ -35,7 +35,8 @@ Google Maps
     }
     map = L.map("map", {
       preferCanvas: true
-    }).setView([37.8, -96], 4);
+    }).setView([38.8, -77], 4);
+    map.setZoom(8);
     layer_group = L.layerGroup().addTo(map);
     let tiles = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
       maxZoom: 19,
