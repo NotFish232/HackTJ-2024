@@ -55,3 +55,6 @@ def sign_up_view(request):
 
 def profile_view(request):
     pass
+
+def video_view(request):
+    pass

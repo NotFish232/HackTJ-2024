@@ -1,3 +1,8 @@
+body {
+    background-color: #CECECE;
+}
+
+
 nav.navbar {
     background-color: #2A2E30 !important;
     height: 50px;
@@ -33,7 +38,6 @@ h1 {
     text-align: center;
     font-size: 30px;
     font-family: 'Times New Roman', Times, serif;
-    background-color: #ff00bf;
 }
 
 #reportbutton{

@@ -11,4 +11,5 @@ urlpatterns = [
     path('sign_up', sign_up_view, name="sign_up"),
     path('profile', profile_view, name="profile"),
     path('logout', logout, name="logout"),
+    path('video', video_view, name="video"),
 ]
