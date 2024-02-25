@@ -2,6 +2,12 @@ h2 {
     text-align: center;
 }
 
+.run-ml {
+    color: rgb(149, 107, 3);
+    display: inline;
+    position: relative;
+    top: 1px;
+}
 
 hr.people {
     border: 2px solid rgb(0, 131, 0);
@@ -23,4 +29,9 @@ input[type='file'] {
 input[type='submit'] {
     position: relative;
     bottom: 1px;
+}
+
+.row img {
+    height: 200px;
+    max-width: 250px;
 }

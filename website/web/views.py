@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
+from django.conf import settings
 from django.http import StreamingHttpResponse
 from django.urls import reverse
 from .models import *
@@ -10,6 +11,10 @@ from apis.get_live_feed import get_live_feed, AVAILABLE_CAMERA_FEEDS
 import random
 import datetime
 from .forms import *
+
+
+def get_result_path(path):
+    return "static/" + path.replace("./website/apis/", "")
 
 
 def home_view(request):
@@ -163,7 +168,29 @@ def report_information_view(request):
 
 
 def dashboard_view(request):
-    return render(request, "dashboard.html")
+    last_facial_recognition = FacialDetectionResult.objects.last(),
+    last_person_description = PersonDescriptionResult.objects.last(),
+    last_people_get_all = PeopleGetAllResult.objects.last(),
+    last_vehicle_identification = VehicleIdentificationResult.objects.last(),
+    last_license_plate = LicensePlateResult.objects.last(),
+    context = {
+        "facial_source": get_result_path(last_facial_recognition[0].source_image),
+        "facial_target": get_result_path(last_facial_recognition[0].target_image),
+        "facial_box": get_result_path(last_facial_recognition[0].box_result),
+        "facial_cropped": get_result_path(last_facial_recognition[0].cropped_result),
+        "person_image": get_result_path(last_person_description[0].image),
+        "person_description": last_person_description[0].description,
+        "people_image": get_result_path(last_people_get_all[0].image),
+        "people_box": get_result_path(last_people_get_all[0].box_result),
+        "people_cropped": get_result_path(last_people_get_all[0].cropped_result),
+        "vehicle_image": get_result_path(last_vehicle_identification[0].image),
+        "vehicle_description": last_vehicle_identification[0].description,
+        "vehicle_box": get_result_path(last_vehicle_identification[0].box_result),
+        "vehicle_cropped": get_result_path(last_vehicle_identification[0].cropped_result),
+        "license_image": get_result_path(last_license_plate[0].image),
+        "license_plate": last_license_plate[0].license_plate,
+    }
+    return render(request, "dashboard.html", context)
 
 
 def map_view(request):

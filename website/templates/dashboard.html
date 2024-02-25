@@ -14,10 +14,9 @@
 <div class="row" style="text-align: center">
     <form method="post">
         {% csrf_token %}
-        <div class="mb-3">
-            <input name="file" class="form-control form-control-md" type="file" required>
-            {% comment %} <input type="submit" value="Run ML" class="btn gold"> {% endcomment %}
-        </div>
+        <h4 class="run-ml">Input Image:</h4>&nbsp;&nbsp;&nbsp;    
+        <input name="file" class="form-control form-control-md" type="file" required>
+        {% comment %} <input type="submit" value="Run ML" class="btn gold"> {% endcomment %}
     </form>
 </div>
 <div class="row">
@@ -26,14 +25,69 @@
         <hr noshade class="hr-header people">
         <div class="row">
             <h4>Facial Recognition</h4>
+            <div class="row">
+                <div class="col">
+                    Source:
+                    <br>
+                    <img src="{{ facial_source }}">
+                </div>
+                <div class="col">
+                    Target:
+                    <br>
+                    <img src="{{ facial_target }}">
+                </div>
+            </div>
+            <div class="row" style="margin-top: 10px">
+                <div class="col">
+                    Boxed:
+                    <br>
+                    <img src="{{ facial_box }}">
+                </div>
+                <div class="col">
+                    Cropped:
+                    <br>
+                    <img src="{{ facial_cropped }}">
+                </div>
+            </div>
         </div>
         <hr class="people">
         <div class="row">
             <h4>Get All People</h4>
+            <div class="row">
+                <div class="col">
+                    Source:
+                    <br>
+                    <img src="{{ people_image }}">
+                </div>
+            </div>
+            <div class="row" style="margin-top: 10px">
+                <div class="col">
+                    Boxed:
+                    <br>
+                    <img src="{{ people_box }}">
+                </div>
+                <div class="col">
+                    Cropped:
+                    <br>
+                    <img src="{{ people_cropped }}">
+                </div>
+            </div>
         </div>
         <hr class="people">    
         <div class="row">
             <h4>Person Description</h4>
+            <div class="row">
+                <div class="col">
+                    Source:
+                    <br>
+                    <img src="{{ person_image }}">
+                </div>
+                <div class="col">
+                    Description:
+                    <br>
+                    {{ person_description }}
+                </div>
+            </div>
         </div>
         <hr class="people">
     </div>
@@ -41,11 +95,49 @@
         <h2>Vehicles</h2>
         <hr noshade class="hr-header vehicle">
         <div class="row">
-            <h4>License Plate Recognition</h4>
-        </div>
-        <hr class="vehicle">
-        <div class="row">
-            <h4>Vehicle Identification</h4>
+            <div class="row">
+                <h4>Vehicle Identification</h4>
+                <div class="row">
+                    <div class="col">
+                        Source:
+                        <br>
+                        <img src="{{ vehicle_image }}">
+                    </div>
+                    <div class="col">
+                        Description:
+                        <br>
+                        {{ vehicle_description }}
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 10px">
+                    <div class="col">
+                        Boxed:
+                        <br>
+                        <img src="{{ vehicle_box }}">
+                    </div>
+                    <div class="col">
+                        Cropped:
+                        <br>
+                        <img src="{{ vehicle_cropped }}">
+                    </div>
+                </div>
+            </div>
+            <hr class="vehicle" style="margin-top: 16px;">
+            <div class="row">
+                <h4>License Plate Recognition</h4>
+                <div class="row">
+                    <div class="col">
+                        Source:
+                        <br>
+                        <img src="{{ license_image }}">
+                    </div>
+                    <div class="col">
+                        License plate:
+                        <br>
+                        {{ license_plate }}
+                    </div>
+                </div>
+            </div>
         </div>
         <hr class="vehicle">    
     </div>

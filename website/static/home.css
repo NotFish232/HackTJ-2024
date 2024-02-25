@@ -1,12 +1,12 @@
 body{
     align-items: center;
     justify-content: center;
-    background-color: aliceblue;
+    background-color: #a4ccff;
 }
 
 section {
-    padding: 50px;
-    padding-bottom: 500px;
+    padding-top: 300px;
+    padding-bottom: 300px;
 }
 
 #sec-00 {
@@ -24,12 +24,25 @@ section {
     padding-bottom: 2%;
     margin: 0;
     font-weight: bold;
-    
+    padding-top: 9;
 }
 #sec-00 h3 {
     font-size: 2em;
     padding-bottom: 5%;
     margin: 0;
+}
+
+#sec-01{
+    display: flex;
+    flex-direction: row;
+    align-items: normal;
+    justify-content: center;
+    transform: translateX(2.5%);
+}
+
+.statcard{
+    width: 30%;
+    padding: 30px;
 }
 
 #learnmore {
@@ -53,3 +66,14 @@ section {
     flex: 0 0 auto;
 }
   
+.stats {
+    color: #ff7171;
+}
+
+.sec-02 .content{
+    width: 30%;
+}
+
+.statcard {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
