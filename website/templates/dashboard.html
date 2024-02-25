@@ -16,7 +16,7 @@
         {% csrf_token %}
         <h4 class="run-ml">Input Image:</h4>&nbsp;&nbsp;&nbsp;    
         <input name="file" class="form-control form-control-md" type="file" required>
-        {% comment %} <input type="submit" value="Run ML" class="btn gold"> {% endcomment %}
+        {% comment %} <input type="submit" value="Run" class="btn gold"> {% endcomment %}
     </form>
 </div>
 <div class="row">
@@ -28,6 +28,7 @@
                 <a href="{% url 'facial-recognition' %}">
                 Facial Recognition
                 </a>
+                <input type="submit" value="Run" class="btn gold" style="float: right">
             </h4>
             <div class="row">
                 <div class="col">
@@ -60,6 +61,7 @@
                 <a href="{% url 'people-all' %}">
                 Get All People
                 </a>
+                <input type="submit" value="Run" class="btn gold" style="float: right">
             </h4>
             <div class="row">
                 <div class="col">
@@ -87,6 +89,7 @@
                 <a href="{% url 'person-description' %}">
                 Person Description
                 </a>
+                <input type="submit" value="Run" class="btn gold" style="float: right">
             </h4>
             <div class="row">
                 <div class="col">
@@ -112,6 +115,7 @@
                     <a href="{% url 'vehicle-identification' %}">
                     Vehicle Identification
                     </a>
+                    <input type="submit" value="Run" class="btn gold" style="float: right">
                 </h4>
                 <div class="row">
                     <div class="col">
@@ -144,6 +148,7 @@
                     <a href="{% url 'license-plate' %}">
                     License Plate Recognition
                     </a>
+                    <input type="submit" value="Run" class="btn gold" style="float: right">
                 </h4>
                 <div class="row">
                     <div class="col">
