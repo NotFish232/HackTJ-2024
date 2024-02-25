@@ -63,7 +63,7 @@ def get_person_description(image_path: str) -> str:
         )
 
         return response.json()["choices"][0]["message"]["content"]
-    except:
+    except Exception as e:
         return ""
 
 

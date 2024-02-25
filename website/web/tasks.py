@@ -9,7 +9,8 @@ django.setup()
 from celery import Celery
 from pathlib import Path
 from apis.get_facial_detection import get_facial_detection
-from web.models import FacialDetectionResult
+from apis.get_person_description import get_person_description
+from web.models import FacialDetectionResult, PersonDescriptionResult
 
 app = Celery("tasks", broker="redis://localhost//")
 
@@ -29,3 +30,10 @@ def run_facial_detection() -> None:
             box_result=detection_result[0] if detection_result else None,
             cropped_result=detection_result[1] if detection_result else None,
         ).save()
+
+
+@app.task
+def run_person_description() -> None:
+    image = str(image_dir / "initial_image.png")
+    description = get_person_description(image)
+    PersonDescriptionResult(image=image, description=description).save()
