@@ -53,26 +53,28 @@ def get_color_name(requested_color: tuple[int, int, int]) -> str:
 
 def get_vehicles(
     image_path: str,
-) -> tuple[str, list[tuple[int, int, int, int, str]]]:
+) -> tuple[str, list[tuple[str, str]]]:
     image = np.array(Image.open(image_path))
     result = model.predict(image, device="cpu", verbose=False)[0]
     annotator = Annotator(image, font_size=1, line_width=1)
     vehicle_data = []
 
+    idx = 0
     for box in result.boxes:
         label = model.names[box.cls.item()]
         if label in VEHICLE_LABELS:
+            idx += 1
             x1, y1, x2, y2 = [*map(int, box[0].xyxy[0])]
             cropped_image = image[y1:y2, x1:x2]
+            cropped_url = f"{current_dir}/temp/{idx}-{image_path.rsplit('/', 1)[1]}"
+            Image.fromarray(cropped_image).save(cropped_url)
             color = get_color_name(np.mean(cropped_image, axis=(0, 1)).astype(np.int32))
             description = f"{color} {label}"
             annotator.box_label(box.xyxy[0], description, color=(255, 0, 0))
 
-            vehicle_data.append(
-                (*map(lambda x: x.item(), box[0].xywhn[0]), description)
-            )
+            vehicle_data.append((cropped_url, description))
 
-    out_path = f"{current_dir}/temp/{image_path}"
+    out_path = f"{current_dir}/temp/{image_path.rsplit('/', 1)[1]}"
     Image.fromarray(image).save(out_path)
 
     return out_path, vehicle_data
