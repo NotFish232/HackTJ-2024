@@ -125,6 +125,7 @@ class PersonDescriptionResult(models.Model):
     image = models.CharField(max_length=500)
     description = models.CharField(max_length=500)
 
+
 class VehicleIdentificationResult(models.Model):
     image = models.CharField(max_length=500)
     description = models.CharField(max_length=500)
@@ -132,11 +133,16 @@ class VehicleIdentificationResult(models.Model):
     cropped_result = models.CharField(max_length=500)
 
 
+class PeopleGetAllResult(models.Model):
+    image = models.CharField(max_length=500)
+    box_result = models.CharField(max_length=500)
+    cropped_result = models.CharField(max_length=500)
 
 class InformationReport(models.Model):
-    person = models.ForeignKey('Person', on_delete=models.SET_NULL, null=True, blank=True)
+    person = models.ForeignKey(
+        "Person", on_delete=models.SET_NULL, null=True, blank=True
+    )
     description = models.TextField()
     date = models.DateTimeField()
     location = models.CharField(max_length=500, null=True, blank=True)
     photo = models.ImageField(upload_to="static/reports", blank=True, null=True)
-

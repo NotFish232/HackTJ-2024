@@ -42,9 +42,10 @@ def get_color_name(requested_color: tuple[int, int, int]) -> str:
 
 def get_people(
     image_path: str,
-) -> list[str]:
+) -> tuple[str, list[str]]:
     image = np.array(Image.open(image_path))
     result = model.predict(image, device="cpu", verbose=False)[0]
+    annotator = Annotator(image, line_width=1)
 
     people_paths = []
 
@@ -55,13 +56,21 @@ def get_people(
         if label == "person":
             x1, y1, x2, y2 = [*map(int, box[0].xyxy[0])]
             cropped_image = image[y1:y2, x1:x2]
-            path = f"{current_dir}/temp/{idx}-{image_path}"
+            path = f"{current_dir}/temp/{idx}-people-{image_path.rsplit('/', 1)[1]}"
             Image.fromarray(cropped_image).save(path)
             people_paths.append(path)
 
+            annotator.box_label(
+                    box.xyxy[0],
+                    color=(255, 0, 0),
+                )
+
             idx += 1
 
-    return people_paths
+    path = f"{current_dir}/temp/people-{image_path.rsplit('/', 1)[1]}"
+    Image.fromarray(image).save(path)
+
+    return path, people_paths
 
 
 def main() -> None:

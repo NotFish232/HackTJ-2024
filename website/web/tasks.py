@@ -11,10 +11,12 @@ from pathlib import Path
 from apis.get_facial_detection import get_facial_detection
 from apis.get_person_description import get_person_description
 from apis.get_vehicles import get_vehicles
+from apis.get_people import get_people
 from web.models import (
     FacialDetectionResult,
     PersonDescriptionResult,
     VehicleIdentificationResult,
+    PeopleGetAllResult,
 )
 
 app = Celery("tasks", broker="redis://localhost//")
@@ -56,3 +58,16 @@ def run_vehicles() -> None:
             description=desc,
             cropped_result=cropped_image,
         ).save()
+
+
+@app.task
+def get_all_people() -> None:
+    image = str(image_dir / "facial-detection-2.png")
+    box_image, sub_image_paths = get_people(image)
+    for cropped_image in sub_image_paths:
+        PeopleGetAllResult(
+            image=image, box_result=box_image, cropped_result=cropped_image
+        ).save()
+
+
+get_all_people()
