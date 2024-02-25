@@ -138,6 +138,10 @@ class PeopleGetAllResult(models.Model):
     box_result = models.CharField(max_length=500)
     cropped_result = models.CharField(max_length=500)
 
+class LicensePlateResult(models.Model):
+    image = models.CharField(max_length=500)
+    license_plate = models.CharField(max_length=64)
+
 class InformationReport(models.Model):
     person = models.ForeignKey(
         "Person", on_delete=models.SET_NULL, null=True, blank=True

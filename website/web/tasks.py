@@ -12,11 +12,13 @@ from apis.get_facial_detection import get_facial_detection
 from apis.get_person_description import get_person_description
 from apis.get_vehicles import get_vehicles
 from apis.get_people import get_people
+from apis.get_license_plate import get_license_plate
 from web.models import (
     FacialDetectionResult,
     PersonDescriptionResult,
     VehicleIdentificationResult,
     PeopleGetAllResult,
+    LicensePlateResult
 )
 
 app = Celery("tasks", broker="redis://localhost//")
@@ -70,4 +72,8 @@ def get_all_people() -> None:
         ).save()
 
 
-get_all_people()
+@app.task 
+def get_license_plate_str() -> None:
+    image = str(image_dir / "license_plate.png")
+    license_plate = get_license_plate(image)
+    LicensePlateResult(image=image, license_plate=license_plate).save()
