@@ -13,10 +13,9 @@ Video
 <div class="video_feed_wrapper">
     {% for video_feed in video_feeds %}
 
-    <video width="352" height="198" controls>
-        <source src="{{ video_feed }}" type="application/x-mpegurl">
-    </video>
-
+    <div class="video_feed_div">
+        <img class="video_feed_img" src="{% url 'video_stream' video_feed %}">
+    </div>
 
     {% endfor %}
 </div>
