@@ -136,5 +136,16 @@ def report_missing_view(request):
         "form": form,
     })
 
+
 def report_information_view(request):
-    pass
+    if request.method == "POST":
+        form = InformationReportForm(request.POST, request.FILES)
+        if form.is_valid():
+            report = form.save(commit=False)
+            report.save()
+            messages.success(request, "Report submitted.")
+            return redirect(reverse("report-information"))
+    form = InformationReportForm()
+    return render(request, "report_information.html", {
+        "form": form,
+    })

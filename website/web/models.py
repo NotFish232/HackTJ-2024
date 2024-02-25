@@ -119,3 +119,11 @@ class FacialDetectionResult(models.Model):
     found_match = models.BooleanField()
     box_result = models.CharField(max_length=500, null=True, blank=True)
     cropped_result = models.CharField(max_length=500, null=True, blank=True)
+
+class InformationReport(models.Model):
+    person = models.ForeignKey('Person', on_delete=models.SET_NULL, null=True, blank=True)
+    description = models.TextField()
+    date = models.DateTimeField()
+    location = models.CharField(max_length=500, null=True, blank=True)
+    photo = models.ImageField(upload_to="static/reports", blank=True, null=True)
+

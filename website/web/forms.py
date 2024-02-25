@@ -33,3 +33,20 @@ class MissingPersonReportForm(forms.ModelForm):
             'location', 
             'person',
         ]
+
+class InformationReportForm(forms.ModelForm):
+    class Meta:
+        model = InformationReport
+        fields = [
+            'person',
+            'description',
+            'date',
+            'location',
+            'photo',
+        ]
+        help_texts = {
+            'person': 'Person who is the subject of this report (if known)',
+            'date': 'Date and time of event',
+            'photo': 'Photo of event or person (if available)'
+        }
+
