@@ -10,9 +10,14 @@ Video
 {% endblock %}
 
 {% block body %}
-{% for video_feed in video_feeds %}
+<div class="video_feed_wrapper">
+    {% for video_feed in video_feeds %}
 
-<img src="{% url 'video_stream' video_feed %}">
+    <video width="352" height="198" controls>
+        <source src="{{ video_feed }}" type="application/x-mpegurl">
+    </video>
 
-{% endfor %}
+
+    {% endfor %}
+</div>
 {% endblock %}

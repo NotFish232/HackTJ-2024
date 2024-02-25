@@ -80,7 +80,7 @@ def profile_view(request):
 
 
 def video_view(request):
-    ctx = {"video_feeds": random.sample(AVAILABLE_CAMERA_FEEDS, 20)}
+    ctx = {"video_feeds": random.sample(AVAILABLE_CAMERA_FEEDS, 12)}
     return render(request, "video.html", ctx)
 
 

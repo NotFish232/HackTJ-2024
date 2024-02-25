@@ -1,0 +1,16 @@
+.video_feed_div {
+    width: 100px;
+    height: 100px;
+}
+
+.video_feed_img {
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.video_feed_wrapper {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+	grid-template-rows: repeat(3, 1fr);
+	grid-gap: 10px;
+}
