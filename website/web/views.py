@@ -8,6 +8,7 @@ from django.urls import reverse
 from .models import *
 from apis.get_live_feed import get_live_feed, AVAILABLE_CAMERA_FEEDS
 import random
+from .forms import *
 
 
 def home_view(request):
@@ -76,7 +77,18 @@ def sign_up_view(request):
 
 
 def profile_view(request):
-    pass
+    if request.method == "POST":
+        form = ProfileForm(request.POST, request.FILES, instance=request.user.person)
+        if form.is_valid():
+            person = form.save(commit=False)
+            person.user = request.user
+            person.save()
+            messages.success(request, "Profile updated.")
+            return redirect(reverse("profile"))
+    form = ProfileForm(instance=request.user.person)
+    return render(request, "profile.html", {
+        "form": form,
+    })
 
 
 def video_view(request):

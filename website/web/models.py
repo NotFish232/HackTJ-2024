@@ -10,6 +10,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
     email = models.EmailField(unique=True)
+    phone_number = models.CharField(max_length=255, blank=True, null=True)
     person = models.OneToOneField('Person', on_delete=models.SET_NULL, null=True, blank=True)
  
 

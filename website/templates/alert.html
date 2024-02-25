@@ -2,7 +2,10 @@
     <img src={{ alert.person.photo_url }} class="alert-photo" height="110">
     <p class="alert-date">
         Missing from: {{ alert.location }}. &nbsp;&nbsp;&nbsp;
-        Missing since: {{ alert.date }}
+        Missing since: {{ alert.date }} &nbsp;&nbsp;&nbsp;
+        <span class="alert-type-{{ alert.type }} alert-type">
+            {{ alert.get_type_display }} Alert
+        </span>
     </p>
     <h3 class="alert-name">{{ alert.person.full_name }}</h3>
     <div class="alert-person-info">

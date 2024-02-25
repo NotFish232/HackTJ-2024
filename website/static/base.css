@@ -1,6 +1,6 @@
-body {
-    background-color: #CECECE;
-}
+    /* body {
+        background-color: #ebebeb;
+    } */
 
 
 nav.navbar {
@@ -49,4 +49,23 @@ h1 {
 
 .center {
     text-align: center;
+}
+
+.gold {
+    background-color: rgb(206, 153, 18);
+    color: white;
+}
+
+.gold:hover {
+    background-color: rgb(185, 135, 9);
+    color: white;
+}
+
+.gold:active {
+    background-color: rgb(185, 135, 9);
+    color: white;
+}
+
+.form-control, .form-select {
+    border: 1px solid rgba(163, 117, 0, 0.51);
 }
