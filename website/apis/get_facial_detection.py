@@ -21,15 +21,16 @@ def get_facial_detection(
     face_encodings = face_recognition.face_encodings(image, face_locations)
 
     for location, encoding in zip(face_locations, face_encodings):
-        match = face_recognition.compare_faces(encoding, target_face_encoding)[0]
+        try:
+            match = face_recognition.compare_faces(encoding, target_face_encoding)[0]
+        except:
+            continue
 
         if match:
             top, right, bottom, left = location
 
-            recognition_path = (
-                f"{current_dir}/temp/box-{image_path}-{target_image_path}"
-            )
-            cropped_path = f"{current_dir}/temp/crop-{image_path}-{target_image_path}"
+            recognition_path = f"{current_dir}/temp/box-{image_path.rsplit('/', 1)[1]}-{target_image_path.rsplit('/', 1)[1]}"
+            cropped_path = f"{current_dir}/temp/crop-{image_path.rsplit('/', 1)[1]}-{target_image_path.rsplit('/', 1)[1]}"
 
             Image.fromarray(image[top:bottom, left:right]).save(cropped_path)
             cv2.rectangle(image, (left, top), (right, bottom), (0, 0, 255), 3)

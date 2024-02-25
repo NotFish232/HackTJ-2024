@@ -12,6 +12,7 @@ import datetime
 from .forms import *
 
 
+
 def home_view(request):
     return render(request, "home.html")
 
