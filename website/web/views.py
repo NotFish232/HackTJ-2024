@@ -152,3 +152,6 @@ def report_information_view(request):
 
 def dashboard_view(request):
     return render(request, "dashboard.html")
+
+def map_view(request):
+    return render(request, "google-maps-address.html")
