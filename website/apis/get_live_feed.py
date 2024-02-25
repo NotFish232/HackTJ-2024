@@ -2,6 +2,7 @@ import requests
 import shutil
 import os
 import cv2
+import time
 from typing import Generator
 
 FPS = 15
@@ -53,6 +54,7 @@ def get_live_feed(base_url: str, save_video: bool = True) -> Generator[str, None
                     b"--frame\r\n"
                     b"Content-Type: image/jpeg\r\n\r\n" + image_bytes + b"\r\n"
                 )
+                time.sleep(0.05)
 
             cap.release()
 
