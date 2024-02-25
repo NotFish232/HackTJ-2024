@@ -25,12 +25,13 @@ Google Maps
   let map, layer_group;
   window.onload = async () => {
     async function location_callback(addr, origin) {
-      let r = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${addr}&key=AIzaSyBzymwd4HDcbhC3AQ_zZtHju_jcLclpRYU`);
+      let x = addr.split("\t\t\t")
+      let r = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${x[0]}&key=AIzaSyBzymwd4HDcbhC3AQ_zZtHju_jcLclpRYU`);
       let json = await r.json();
       let geo = json.results[0].geometry.location;
 
       L.marker([geo.lat, geo.lng])
-                    .bindPopup(`<b>${addr}<br/>${origin}</b>`)
+                    .bindPopup(`<b>${x[0]}<br/>Id: ${x[1]}<br/>${origin}</b>`)
                     .addTo(layer_group);
     }
     map = L.map("map", {

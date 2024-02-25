@@ -195,9 +195,9 @@ def dashboard_view(request):
 
 def map_view(request):
     information_locations = [
-        *map(lambda i: i.location, InformationReport.objects.all())
+        *map(lambda i: f"{i.location}\t\t\t{i.id}", InformationReport.objects.all())
     ]
-    alert_locations = [*map(lambda i: i.location, Alert.objects.all())]
+    alert_locations = [*map(lambda i: f"{i.location}\t\t\t{i.id}", Alert.objects.all())]
     ctx = {
         "information_locations": information_locations,
         "alert_locations": alert_locations,
