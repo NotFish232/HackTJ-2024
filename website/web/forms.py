@@ -19,3 +19,17 @@ class ProfileForm(forms.ModelForm):
             'photo',
             'description',
         ]
+
+class MissingPersonReportForm(forms.ModelForm):
+    def __init__(self, user, *args, **kwargs):
+        super(MissingPersonReportForm, self).__init__(*args, **kwargs)
+        ids = [u.person.id for u in user.trusted_contacts.filter(person__missing=False)]
+        self.fields['person'].queryset = Person.objects.filter(id__in=ids)
+    
+    class Meta:
+        model = Alert
+        fields = [
+            'description',
+            'location', 
+            'person',
+        ]

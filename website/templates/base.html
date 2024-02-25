@@ -37,17 +37,28 @@
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="{% url 'alerts' %}">Alerts</a>
           </li>
+          {% if request.user.is_authenticated and request.user.is_staff %}
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="{% url 'video' %}">Video</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="{% url 'admin:index' %}">Admin</a>
           </li>
-          <li class="nav-item" id="reportbutton">
-            <a class="nav-link" aria-current="page">REPORT</a>
-          </li>
+          {% endif %}
         </ul>
         <ul class="navbar-nav" style="position: absolute; right: 10px;">
+           <li class="nav-item report-link">
+            <a class="nav-link" aria-current="page" href="{% url 'report-missing' %}">
+              <i class="fas fa-exclamation-triangle"></i>&nbsp;
+              Report Missing Person
+            </a>
+          </li>
+          <li class="nav-item report-link">
+            <a class="nav-link" aria-current="page" href="{% url 'report-information' %}">
+              <i class="fas fa-info-circle"></i>&nbsp;
+              Report Information
+            </a>
+          </li>
           {% if request.user.is_authenticated %}
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="{% url 'profile' %}">
@@ -73,8 +84,7 @@
   {% endblock %}
   </div>
   {% block footer %}
-
-{% endblock %}
+  {% endblock %}
 
 
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js"></script>

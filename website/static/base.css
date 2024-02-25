@@ -22,7 +22,7 @@ img.navbar-logo {
 }
 
 .nav-link:hover {
-    color: rgb(209, 178, 0);
+    color: rgb(224, 197, 44);
 }
 
 
@@ -68,4 +68,18 @@ h1 {
 
 .form-control, .form-select {
     border: 1px solid rgba(163, 117, 0, 0.51);
+}
+
+.form-control:focus, .form-select:focus {
+    border: 1px solid rgba(163, 117, 0, 0.51);
+    box-shadow: 0 0 0 0.2rem rgba(163, 117, 0, 0.25);
+}
+
+.form-label {
+    color: rgb(123, 88, 0);
+    font-weight: bold;
+}
+
+.report-link .nav-link {
+    color: rgb(253, 12, 12);
 }

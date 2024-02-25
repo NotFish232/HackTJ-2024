@@ -15,6 +15,12 @@
 
 {% block body %}
 
+{% for message in messages %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+{% endfor %}
+
 <h2 class="alerts-active center">Active Alerts</h2>
 {% for alert in active_alerts %}
     {% include 'alert.html' %}

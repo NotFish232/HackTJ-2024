@@ -3,14 +3,14 @@ section{
     padding-bottom: 500px;
 }
 
-sec-00{
-    align-items: center;
-
-
-    
+.sec-00 h3{
+    font-size: 2em;
 }
 
-
+#learnmore{
+    bor;
+    background-color: red;
+}
 
 .statcard{ 
     align-items: center;

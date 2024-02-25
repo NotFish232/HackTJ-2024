@@ -12,5 +12,7 @@ urlpatterns = [
     path('profile', profile_view, name="profile"),
     path('logout', logout, name="logout"),
     path('video', video_view, name="video"),
-    path('video_stream/<path:video_path>', video_stream, name="video_stream")
+    path('video_stream/<path:video_path>', video_stream, name="video_stream"),
+    path('report-missing', report_missing_view, name="report-missing"),
+    path("report-information", report_information_view, name="report-information"),
 ]

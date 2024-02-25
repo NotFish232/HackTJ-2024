@@ -32,11 +32,11 @@
                 <span>{{ error }}</span>
             </div>
         {% endif %}
-        {% if message %}
+        {% for message in messages %}
             <br>
-            <div class="alert alert-success" role="alert">
+            <div class="alert alert-info" role="alert">
                 {{ message }}
             </div>
-        {% endif %}
+        {% endfor %}
     </form>
 {% endblock %}

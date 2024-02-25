@@ -8,6 +8,7 @@ from django.urls import reverse
 from .models import *
 from apis.get_live_feed import get_live_feed, AVAILABLE_CAMERA_FEEDS
 import random
+import datetime
 from .forms import *
 
 
@@ -52,7 +53,16 @@ def login_view(request):
         user = authenticate(username=user.email, password=password)
         if user is not None:
             auth_login(request, user)
+
+            if request.GET.get("next"):
+                try:
+                    url = reverse(request.GET.get("next").replace("/", ""))
+                    return redirect(url)
+                except:
+                    pass
+            
             return redirect(reverse("index"))
+        
         return render(
             request,
             "login.html",
@@ -101,3 +111,29 @@ def video_stream(request, video_path):
         get_live_feed(video_path, save_video=False),
         content_type="multipart/x-mixed-replace; boundary=frame"
     )
+
+
+def report_missing_view(request):
+    if not request.user.is_authenticated:
+        messages.success(request, "You must be logged in to report someone missing.")
+        return redirect(reverse("login") + "?next=/report-missing")
+    if request.method == "POST":
+        form = MissingPersonReportForm(request.user, request.POST)
+        if form.is_valid():
+            alert = form.save(commit=False)
+            alert.user = request.user
+            alert.type = "vigilant"
+            alert.date = datetime.datetime.now()
+            alert.contact = f"{request.user.person.first_name} {request.user.person.last_name}. Email: {request.user.email}. Phone: {request.user.phone_number}."
+            alert.save()
+            alert.person.missing = True
+            alert.person.save()
+            messages.success(request, "Report submitted.")
+            return redirect(reverse("alerts"))
+    form = MissingPersonReportForm(request.user)
+    return render(request, "report_missing.html", {
+        "form": form,
+    })
+
+def report_information_view(request):
+    pass

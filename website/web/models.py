@@ -12,7 +12,13 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
     phone_number = models.CharField(max_length=255, blank=True, null=True)
     person = models.OneToOneField('Person', on_delete=models.SET_NULL, null=True, blank=True)
+
+    trusted_contacts = models.ManyToManyField('User', blank=True, related_name="trusted_contact_set")
  
+    def __str__(self):
+        if self.person:
+            return self.person.full_name
+        return self.email
 
 class Person(models.Model):
     first_name = models.CharField(max_length=255, blank=True, null=True)
@@ -63,7 +69,7 @@ class Person(models.Model):
 
 
 class Alert(models.Model):
-    title = models.CharField(max_length=500)
+    # title = models.CharField(max_length=500)
     description = models.TextField()
     type = models.CharField(choices=[
         ('vigilant', 'Vigilant'),
@@ -81,19 +87,8 @@ class Alert(models.Model):
     contact = models.CharField(max_length=500, null=True, blank=True)
 
     def __str__(self):
-        return self.title
+        return f"{self.get_type_display()} Alert for {self.person.full_name} at {self.date}"
     
     class Meta:
         ordering = ['-date']
 
-
-class Report(models.Model):
-    title = models.CharField(max_length=500)
-    description = models.TextField()
-    date = models.DateTimeField(auto_now_add=True)
-    location = models.CharField(max_length=500, null=True, blank=True)
-    reporter = models.ForeignKey('User', on_delete=models.SET_NULL, null=True)
-    alert = models.ForeignKey('Alert', on_delete=models.SET_NULL, null=True, blank=True)
-
-    def __str__(self):
-        return self.title

@@ -1,0 +1,13 @@
+.form-control, .form-select {
+    border: 1px solid rgb(255, 107, 107);
+}
+
+.form-control:focus, .form-select:focus { 
+    border: 1px solid rgb(255, 107, 107);
+    box-shadow: 0 0 0 0.2rem rgba(255, 107, 107, 0.25);
+}
+
+.form-label {
+    color: rgb(143, 0, 0);
+    font-weight: bold;
+}
