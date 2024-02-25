@@ -2,6 +2,7 @@ import requests
 import shutil
 import os
 import cv2
+from typing import Generator
 
 FPS = 15
 IMG_SIZE = 512
@@ -11,7 +12,7 @@ with open(f"{current_dir}/available_camera_feeds.txt", "r") as f:
     AVAILABLE_CAMERA_FEEDS = f.read().split("\n")
 
 
-def get_live_feed(base_url: str) -> str:
+def get_live_feed(base_url: str, save_video: bool = True) -> Generator[str, None, None]:
     try:
         initial_url = f"{base_url}/playlist.m3u8"
 
@@ -21,10 +22,11 @@ def get_live_feed(base_url: str) -> str:
         r = requests.get(f"{base_url}/{chunk_url}")
         ts_urls = [l for l in r.text.split("\n") if l.endswith(".ts")]
 
-        out_url = f"{current_dir}/temp/{base_url.rsplit('/', -1)[-1].split('.', 1)[0]}.mp4"
-        writer = cv2.VideoWriter(
-            out_url, cv2.VideoWriter_fourcc(*"mp4v"), FPS, (IMG_SIZE, IMG_SIZE)
-        )
+        if save_video:
+            out_url = f"{current_dir}/temp/{base_url.rsplit('/', -1)[-1].split('.', 1)[0]}.mp4"
+            writer = cv2.VideoWriter(
+                out_url, cv2.VideoWriter_fourcc(*"mp4v"), FPS, (IMG_SIZE, IMG_SIZE)
+            )
 
         for ts_url in ts_urls:
             with requests.get(f"{base_url}/{ts_url}", stream=True) as r:
@@ -40,17 +42,27 @@ def get_live_feed(base_url: str) -> str:
                     break
 
                 frame = cv2.resize(frame, (IMG_SIZE, IMG_SIZE))
-                writer.write(frame)
+
+                if save_video:
+                    writer.write(frame)
+
+                encoded_image = cv2.imencode(".jpeg", frame)[1]
+                image_bytes = encoded_image.tobytes()
+
+                yield (
+                    b"--frame\r\n"
+                    b"Content-Type: image/jpeg\r\n\r\n" + image_bytes + b"\r\n"
+                )
 
             cap.release()
 
             os.remove(path)
 
-        writer.release()
+        if save_video:
+            writer.release()
 
-        return out_url
     except:
-        return ""
+        pass
 
 
 def main() -> None:

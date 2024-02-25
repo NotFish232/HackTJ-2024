@@ -32,7 +32,7 @@ def encode_image(image_path: str) -> str:
 
 
 def get_person_description(image_path: str) -> str:
-    try: 
+    try:
         base64_image = encode_image(image_path)
         headers = {
             "Content-Type": "application/json",
@@ -48,7 +48,9 @@ def get_person_description(image_path: str) -> str:
                         {"type": "text", "text": PROMPT},
                         {
                             "type": "image_url",
-                            "image_url": {"url": f"data:image/jpeg;base64,{base64_image}"},
+                            "image_url": {
+                                "url": f"data:image/jpeg;base64,{base64_image}"
+                            },
                         },
                     ],
                 }
@@ -59,7 +61,6 @@ def get_person_description(image_path: str) -> str:
         response = requests.post(
             "https://api.openai.com/v1/chat/completions", headers=headers, json=payload
         )
-
 
         return response.json()["choices"][0]["message"]["content"]
     except:

@@ -7,14 +7,13 @@ import webcolors
 import io
 import os
 
+current_dir = os.path.dirname(os.path.realpath(__file__))
 
-model = YOLO("yolov8n.pt")
+
+model = YOLO(f"{current_dir}/yolov8n.pt")
 
 
 MAX_IMG_SIZE = 512
-
-
-current_dir = os.path.dirname(os.path.realpath(__file__))
 
 
 def encode_image(image: Image.Image) -> str:
@@ -46,13 +45,13 @@ def get_people(
 ) -> list[str]:
     image = np.array(Image.open(image_path))
     result = model.predict(image, device="cpu", verbose=False)[0]
-    
+
     people_paths = []
 
     idx = 0
     for box in result.boxes:
         label = model.names[box.cls.item()]
-        
+
         if label == "person":
             x1, y1, x2, y2 = [*map(int, box[0].xyxy[0])]
             cropped_image = image[y1:y2, x1:x2]
@@ -61,7 +60,6 @@ def get_people(
             people_paths.append(path)
 
             idx += 1
-
 
     return people_paths
 

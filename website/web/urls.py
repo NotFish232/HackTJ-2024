@@ -12,4 +12,5 @@ urlpatterns = [
     path('profile', profile_view, name="profile"),
     path('logout', logout, name="logout"),
     path('video', video_view, name="video"),
+    path('video_stream/<path:video_path>', video_stream, name="video_stream")
 ]

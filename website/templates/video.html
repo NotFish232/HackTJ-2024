@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Video
+{% endblock %}
+
+{% block css %}
+<link href="{% static 'video.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+{% for video_feed in video_feeds %}
+
+<img src="{% url 'video_stream' video_feed %}">
+
+{% endfor %}
+{% endblock %}

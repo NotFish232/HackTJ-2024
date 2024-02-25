@@ -8,7 +8,10 @@ import io
 import os
 
 
-model = YOLO("yolov8n.pt")
+current_dir = os.path.dirname(os.path.realpath(__file__))
+
+
+model = YOLO(f"{current_dir}/yolov8n.pt")
 VEHICLE_LABELS = (
     "car",
     "bicyle",
@@ -22,9 +25,6 @@ VEHICLE_LABELS = (
 
 
 MAX_IMG_SIZE = 512
-
-
-current_dir = os.path.dirname(os.path.realpath(__file__))
 
 
 def encode_image(image: Image.Image) -> str:
