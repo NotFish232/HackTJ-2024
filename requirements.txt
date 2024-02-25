@@ -7,3 +7,4 @@ requests==2.31.0
 python-dotenv==0.21.0
 ultralytics==8.1.15
 webcolors==1.13
+face_recognition==1.3.0
