@@ -18,7 +18,7 @@ from web.models import (
     PersonDescriptionResult,
     VehicleIdentificationResult,
     PeopleGetAllResult,
-    LicensePlateResult
+    LicensePlateResult,
 )
 
 app = Celery("tasks", broker="redis://localhost//")
@@ -27,8 +27,9 @@ image_dir = Path(__file__).parent.parent / "apis/dataset"
 
 
 @app.task
-def run_facial_detection() -> None:
-    initial_image = str(image_dir / "initial_image.png")
+def run_facial_detection(
+    initial_image: str = str(image_dir / "initial_image.png"),
+) -> None:
     for file in image_dir.glob("facial-detection-*.png"):
         file = str(file)
         detection_result = get_facial_detection(file, initial_image)
@@ -42,15 +43,13 @@ def run_facial_detection() -> None:
 
 
 @app.task
-def run_person_description() -> None:
-    image = str(image_dir / "initial_image.png")
+def run_person_description(image: str = str(image_dir / "initial_image.png")) -> None:
     description = get_person_description(image)
     PersonDescriptionResult(image=image, description=description).save()
 
 
 @app.task
-def run_vehicles() -> None:
-    image = str(image_dir / "vehicles.png")
+def run_vehicles(image: str = str(image_dir / "vehicles.png")) -> None:
     box_image, sub_cars = get_vehicles(image)
 
     for cropped_image, desc in sub_cars:
@@ -63,8 +62,7 @@ def run_vehicles() -> None:
 
 
 @app.task
-def get_all_people() -> None:
-    image = str(image_dir / "facial-detection-2.png")
+def get_all_people(image: str = str(image_dir / "facial-detection-2.png")) -> None:
     box_image, sub_image_paths = get_people(image)
     for cropped_image in sub_image_paths:
         PeopleGetAllResult(
@@ -72,8 +70,7 @@ def get_all_people() -> None:
         ).save()
 
 
-@app.task 
-def get_license_plate_str() -> None:
-    image = str(image_dir / "license_plate.png")
+@app.task
+def get_license_plate_str(image: str = str(image_dir / "license_plate.png")) -> None:
     license_plate = get_license_plate(image)
     LicensePlateResult(image=image, license_plate=license_plate).save()
