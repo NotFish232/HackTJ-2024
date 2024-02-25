@@ -1,27 +1,34 @@
-section{
-    padding: 50px;
-    padding-bottom: 500px;
-}
 .body{
     align-items: center;
     justify-content: center;
 }
 
-.sec-00{
+section {
+    padding: 50px;
+    padding-bottom: 500px;
+}
+
+#sec-00 {
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: center;
-}
-.sec-00 h3{
-    font-size: 2em;
+    height: 100vh; /* This ensures that the section takes the full viewport height */
 }
 
-#learnmore{
+#sec-00 h3 {
+    font-size: 2em;
+    padding-bottom: 3x;
+    margin: 0; /* Remove default margin */
+}
+
+#learnmore {
     color: white;
     padding: 10px;
     border-radius: 10px;
     background-color: red;
+    border: none; /* Add this if you want to remove the default border */
+    cursor: pointer; /* Add this to change the cursor on hover */
 }
 
 .statcard{ 

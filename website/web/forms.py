@@ -49,4 +49,7 @@ class InformationReportForm(forms.ModelForm):
             'date': 'Date and time of event',
             'photo': 'Photo of event or person (if available)'
         }
+        widgets = {
+            'date': forms.DateTimeInput(attrs={'type': 'datetime-local'})
+        }
 
