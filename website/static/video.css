@@ -1,6 +1,6 @@
 .video_feed_div {
     flex: 1 0 33%;
-    height: 150px;
+    height: 200px;
     padding: 5px;
     text-align: center;
     vertical-align: middle;
@@ -8,18 +8,18 @@
 }
 
 .video_feed_img {
-    max-height: 100%;
-    max-width: 100%;
+    max-height: 150%;
+    max-width: 150%;
 }
 
 .video_feed_wrapper {
     display: flex;
     flex-wrap: wrap;
-    width: 500px;
-    height: 400px;
+    width: 900px;
+    height: 600px;
     position: absolute;
-    left: 50%;
-    top: 50%;
+    left: 35%;
+    top: 40%;
     margin-left: -250px;
     margin-top: -200px;
 }
