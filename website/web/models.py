@@ -125,6 +125,12 @@ class PersonDescriptionResult(models.Model):
     image = models.CharField(max_length=500)
     description = models.CharField(max_length=500)
 
+class VehicleIdentificationResult(models.Model):
+    image = models.CharField(max_length=500)
+    description = models.CharField(max_length=500)
+    box_result = models.CharField(max_length=500, null=True, blank=True)
+    cropped_result = models.CharField(max_length=500)
+
 
 
 class InformationReport(models.Model):
