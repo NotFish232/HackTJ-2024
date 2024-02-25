@@ -38,6 +38,9 @@
             <a class="nav-link" aria-current="page" href="{% url 'alerts' %}">Alerts</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="{% url 'map' %}">Map</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" aria-current="page" href="{% url 'video' %}">Video</a>
           </li>
           {% if request.user.is_authenticated and request.user.is_staff %}

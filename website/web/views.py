@@ -12,7 +12,6 @@ import datetime
 from .forms import *
 
 
-
 def home_view(request):
     return render(request, "home.html")
 
@@ -61,9 +60,9 @@ def login_view(request):
                     return redirect(url)
                 except:
                     pass
-            
+
             return redirect(reverse("index"))
-        
+
         return render(
             request,
             "login.html",
@@ -97,9 +96,13 @@ def profile_view(request):
             messages.success(request, "Profile updated.")
             return redirect(reverse("profile"))
     form = ProfileForm(instance=request.user.person)
-    return render(request, "profile.html", {
-        "form": form,
-    })
+    return render(
+        request,
+        "profile.html",
+        {
+            "form": form,
+        },
+    )
 
 
 def video_view(request):
@@ -110,7 +113,7 @@ def video_view(request):
 def video_stream(request, video_path):
     return StreamingHttpResponse(
         get_live_feed(video_path, save_video=False),
-        content_type="multipart/x-mixed-replace; boundary=frame"
+        content_type="multipart/x-mixed-replace; boundary=frame",
     )
 
 
@@ -132,9 +135,13 @@ def report_missing_view(request):
             messages.success(request, "Report submitted.")
             return redirect(reverse("alerts"))
     form = MissingPersonReportForm(request.user)
-    return render(request, "report_missing.html", {
-        "form": form,
-    })
+    return render(
+        request,
+        "report_missing.html",
+        {
+            "form": form,
+        },
+    )
 
 
 def report_information_view(request):
@@ -146,12 +153,26 @@ def report_information_view(request):
             messages.success(request, "Report submitted.")
             return redirect(reverse("report-information"))
     form = InformationReportForm()
-    return render(request, "report_information.html", {
-        "form": form,
-    })
+    return render(
+        request,
+        "report_information.html",
+        {
+            "form": form,
+        },
+    )
+
 
 def dashboard_view(request):
     return render(request, "dashboard.html")
 
+
 def map_view(request):
-    return render(request, "google-maps-address.html")
+    information_locations = [
+        *map(lambda i: i.location, InformationReport.objects.all())
+    ]
+    alert_locations = [*map(lambda i: i.location, Alert.objects.all())]
+    ctx = {
+        "information_locations": information_locations,
+        "alert_locations": alert_locations,
+    }
+    return render(request, "google-maps-address.html", ctx)

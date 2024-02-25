@@ -1,23 +1,54 @@
-<script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzymwd4HDcbhC3AQ_zZtHju_jcLclpRYU&libraries=places&callback=initMap"></script>
-<script>
-  function initMap() {
-    const input = document.getElementById('id_location');
-    const center = { lat: 38.89511, lng: 	-77.03637 };  // Washington, DC
+<head>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+    integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+    integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+  <script async
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzymwd4HDcbhC3AQ_zZtHju_jcLclpRYU&libraries=places"></script>
 
-    // 50 km radius
-    const defaultBounds = {
-      north: center.lat + 0.5,
-      south: center.lat - 0.5,
-      east: center.lng + 0.5,
-      west: center.lng - 0.5,
-    };
-    const options = {
-      bounds: defaultBounds,
-      // componentRestrictions: { country: "us" },
-      fields: ["address_components", "geometry", "icon", "name"],
-      strictBounds: false,
-      // types: ["establishment"],
-    };
-    const autocomplete = new google.maps.places.Autocomplete(input, options);
+</head>
+
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Google Maps
+{% endblock %}
+
+
+
+{% block body %}
+<div id="map"
+  style="width:90%;height:500px;position: absolute;left: 50%;top: 50%;margin-left: -45%;margin-top: -200px;"></div>
+
+<script>
+  let map, layer_group;
+  window.onload = async () => {
+    async function location_callback(addr, origin) {
+      let r = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${addr}&key=AIzaSyBzymwd4HDcbhC3AQ_zZtHju_jcLclpRYU`);
+      let json = await r.json();
+      let geo = json.results[0].geometry.location;
+
+      L.marker([geo.lat, geo.lng])
+                    .bindPopup(`<b>${addr}<br/>${origin}</b>`)
+                    .addTo(layer_group);
+    }
+    map = L.map("map", {
+      preferCanvas: true
+    }).setView([37.8, -96], 4);
+    layer_group = L.layerGroup().addTo(map);
+    let tiles = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+      attribution: `&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>`
+    }).addTo(map);
+    {% for location in information_locations %}
+    location_callback("{{ location }}", "Information Report")
+    {% endfor %}
+    {% for location in alert_locations %}
+    location_callback("{{ location }}", "Alert")
+    {% endfor %}
   }
 </script>
+
+
+{% endblock %}

@@ -68,7 +68,7 @@ def get_person_description(image_path: str) -> str:
 
 
 def main() -> None:
-    print(get_person_description("alan_new.jpg"))
+    print(get_person_description("dataset/initial_image.png"))
 
 
 if __name__ == "__main__":
