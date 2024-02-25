@@ -8,7 +8,6 @@ import io
 import os
 
 
-
 model = YOLO("yolov8n.pt")
 VEHICLE_LABELS = (
     "car",
@@ -52,23 +51,23 @@ def get_color_name(requested_color: tuple[int, int, int]) -> str:
     return min_colors[min(min_colors.keys())]
 
 
-def get_vehicle_description(
+def get_vehicles(
     image_path: str,
 ) -> tuple[str, list[int, int, int, int, str]]:
     image = np.array(Image.open(image_path))
     result = model.predict(image, device="cpu", verbose=False)[0]
-    annotator = Annotator(image, line_width=1)
+    annotator = Annotator(image, font_size=1, line_width=1)
     vehicle_data = []
 
     for box in result.boxes:
         label = model.names[box.cls.item()]
         if label in VEHICLE_LABELS:
-            annotator.box_label(box.xyxy[0], color=(255, 0, 0))
-
             x1, y1, x2, y2 = [*map(int, box[0].xyxy[0])]
             cropped_image = image[y1:y2, x1:x2]
             color = get_color_name(np.mean(cropped_image, axis=(0, 1)).astype(np.int32))
             description = f"{color} {label}"
+            annotator.box_label(box.xyxy[0], description, color=(255, 0, 0))
+
             vehicle_data.append(
                 (*map(lambda x: x.item(), box[0].xywhn[0]), description)
             )
@@ -80,7 +79,7 @@ def get_vehicle_description(
 
 
 def main() -> None:
-    print(get_vehicle_description("car_images.png"))
+    print(get_vehicles("cars.png"))
 
 
 if __name__ == "__main__":
