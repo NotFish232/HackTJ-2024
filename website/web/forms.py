@@ -53,3 +53,5 @@ class InformationReportForm(forms.ModelForm):
             'date': forms.DateTimeInput(attrs={'type': 'datetime-local'})
         }
 
+class DashboardForm(forms.Form):
+    pass

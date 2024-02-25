@@ -43,33 +43,13 @@ section {
     cursor: pointer; 
 }
 
-.statcard{ 
-    align-items: center;
-    text-align: center;
-    background-color: rgba(255, 255, 255, 0.3);
-    padding: 30px;
+.parent-container {
+    display: flex;
+    justify-content: space-around; 
+    align-items: center; 
+  }
+  
+.statimg {
+    flex: 0 0 auto;
 }
-.statcard h2{
-    align-items: center;
-    font-size: 2em;
-    padding: 10px;
-}
-
-#statcard1{
-    position: absolute;
-    left:150;
-}
-
-#statcard2{
-    position: absolute;
-    left: 30%;
-    transform: translateX(-30%);
-}
-/* #statcard3{
-    position: absolute;
-    transform: translate(40%);
-} */
-#statcard3{
-    position: absolute;
-    right: 15%;
-}
+  
