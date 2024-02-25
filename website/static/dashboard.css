@@ -14,3 +14,13 @@ hr.vehicle {
 hr.hr-header {
     border-width: 3px;
 }
+
+input[type='file'] {
+    display: inline;
+    width: 300px;
+}
+
+input[type='submit'] {
+    position: relative;
+    bottom: 1px;
+}
