@@ -5,3 +5,5 @@ pillow==9.3.0
 opencv-python==4.8.1.78
 requests==2.31.0
 python-dotenv==0.21.0
+ultralytics==8.1.15
+webcolors==1.13

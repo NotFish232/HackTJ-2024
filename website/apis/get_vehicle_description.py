@@ -1,0 +1,87 @@
+from ultralytics import YOLO
+from ultralytics.utils.plotting import Annotator
+from PIL import Image
+import numpy as np
+import base64
+import webcolors
+import io
+import os
+
+
+
+model = YOLO("yolov8n.pt")
+VEHICLE_LABELS = (
+    "car",
+    "bicyle",
+    "motorcyle",
+    "airplane",
+    "bus",
+    "train",
+    "truck",
+    "boat",
+)
+
+
+MAX_IMG_SIZE = 512
+
+
+current_dir = os.path.dirname(os.path.realpath(__file__))
+
+
+def encode_image(image: Image.Image) -> str:
+    width, height = image.size
+    image = image.resize((min(width, MAX_IMG_SIZE), min(height, MAX_IMG_SIZE)))
+
+    buffer = io.BytesIO()
+    image.save(buffer, format="JPEG")
+    data = buffer.getvalue()
+
+    base64_image = base64.b64encode(data).decode("utf-8")
+    return base64_image
+
+
+def get_color_name(requested_color: tuple[int, int, int]) -> str:
+    min_colors = {}
+    for key, name in webcolors.CSS3_HEX_TO_NAMES.items():
+        r_c, g_c, b_c = webcolors.hex_to_rgb(key)
+        rd = (r_c - requested_color[0]) ** 2
+        gd = (g_c - requested_color[1]) ** 2
+        bd = (b_c - requested_color[2]) ** 2
+        min_colors[(rd + gd + bd)] = name
+
+    return min_colors[min(min_colors.keys())]
+
+
+def get_vehicle_description(
+    image_path: str,
+) -> tuple[str, list[int, int, int, int, str]]:
+    image = np.array(Image.open(image_path))
+    result = model.predict(image, device="cpu", verbose=False)[0]
+    annotator = Annotator(image, line_width=1)
+    vehicle_data = []
+
+    for box in result.boxes:
+        label = model.names[box.cls.item()]
+        if label in VEHICLE_LABELS:
+            annotator.box_label(box.xyxy[0], color=(255, 0, 0))
+
+            x1, y1, x2, y2 = [*map(int, box[0].xyxy[0])]
+            cropped_image = image[y1:y2, x1:x2]
+            color = get_color_name(np.mean(cropped_image, axis=(0, 1)).astype(np.int32))
+            description = f"{color} {label}"
+            vehicle_data.append(
+                (*map(lambda x: x.item(), box[0].xywhn[0]), description)
+            )
+
+    out_path = f"{current_dir}/temp/{image_path}"
+    Image.fromarray(image).save(out_path)
+
+    return out_path, vehicle_data
+
+
+def main() -> None:
+    print(get_vehicle_description("car_images.png"))
+
+
+if __name__ == "__main__":
+    main()
