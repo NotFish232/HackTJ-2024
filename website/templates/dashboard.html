@@ -9,6 +9,17 @@
     <link href="{% static 'dashboard.css' %}" rel="stylesheet">
 {% endblock %}
 
+{% block js %}
+<script>
+    $(function() {
+        setTimeout(function() {
+            $(".progress").slideUp();
+        }, 1000);
+    });
+</script>
+{% endblock %}
+
+
 {% block body %}
 <h1>Dashboard</h1>
 <div class="row" style="text-align: center">
