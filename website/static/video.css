@@ -1,6 +1,10 @@
 .video_feed_div {
-    width: 100px;
+    flex: 1 0 33%;
     height: 100px;
+    padding: 5px;
+    text-align: center;
+    vertical-align: middle;
+    box-sizing: border-box;
 }
 
 .video_feed_img {
@@ -9,8 +13,13 @@
 }
 
 .video_feed_wrapper {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-	grid-template-rows: repeat(3, 1fr);
-	grid-gap: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    width: 400px;
+    height: 300px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -200px;
+    margin-top: -150px;
 }
